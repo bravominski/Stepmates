@@ -32,11 +32,12 @@ class MovesController < ApplicationController
 		http = Net::HTTP.new(uri.host, uri.port)
 		http.use_ssl = true
 
-		request = Net::HTTP::Get.new("/user/activities/daily/20150401")
+		request = Net::HTTP::Get.new("/user/activities/daily/20150401?access_token=" + @token)
 
 		response = http.request(request)
 		@body = response.body
 		@status = response.status
+
 	end
 
 end
