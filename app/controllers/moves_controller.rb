@@ -10,6 +10,12 @@ class MovesController < ApplicationController
 	def receiveAuth
 		@code = params[:code]
 
+
+		
+
+	end
+
+	def helper
 		uri = URI.parse("https://api.moves-app.com/oauth/v1/access_token?grant_type=" + 
 			"authorization_code&code=" + code + "&client_id=rk4jNeuJ054WTTlYV9l4QF9dYsGdFwdl" + 
 			"&client_secret=8x0b3qdW0vlymVotk5njmJnaSX2Qd9veXP970M5nrTZjHGdKGb95V64x10eW51DW&")
@@ -19,7 +25,5 @@ class MovesController < ApplicationController
 		#req['foo'] = 'bar'
 		#req.body = "[ #{@toSend} ]"
 		@res = https.request(req)
-		
-
 	end
 end
