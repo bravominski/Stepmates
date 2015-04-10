@@ -36,8 +36,6 @@ class MovesController < ApplicationController
 
 		response = http.request(request)
 		@body = response.body
-		@status = response.status
-
 	end
 
 end
