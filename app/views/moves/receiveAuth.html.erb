@@ -1,4 +1,4 @@
 <div><%= @res %></div>
 <button class="btn btn-default"> 
-	<%= link_to "get data", moves_getdata_path(:token => @code) %>
+	<%= link_to "get data", moves_getdata_path(:token => @access_token, :refreshToken => @refresh_token) %>
 </button>
