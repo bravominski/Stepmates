@@ -4,7 +4,7 @@ class MovesController < ApplicationController
 	end
 
 	def receiveAuth
-		code = [params[:code]]
-		redirect_to "http://google.com/" + code 
+		code = params[:code]
+
 	end
 end
