@@ -37,7 +37,7 @@ class MovesController < ApplicationController
 
 		response = http.request(request)
 		@body = response.body
-		@status = JSON.parse(@body)[:status]
+		@status = JSON.parse(@body)["status"]
 	end
 
 end
