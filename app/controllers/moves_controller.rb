@@ -1,4 +1,5 @@
 require 'uri'
+require 'json'
 require 'net/http'
 require 'net/https'
 
@@ -35,7 +36,8 @@ class MovesController < ApplicationController
 		request = Net::HTTP::Get.new("/user/activities/daily/20150401?access_token=" + @token)
 
 		response = http.request(request)
-		@body = response.status
+		@body = response.body
+		@status = JSON.parse(@body)[:status]
 	end
 
 end
