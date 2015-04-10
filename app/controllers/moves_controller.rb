@@ -22,6 +22,7 @@ class MovesController < ApplicationController
 			'&client_secret=gE8sVNO5MQNTX_tKLMoYtfBSu4QVeOco5x9FW_FSq38v0V14K_OKRTo69TSUpvhW')
 
 		@res = http.request(request)
+		@res = @res.body
 	end
 
 	def helper
