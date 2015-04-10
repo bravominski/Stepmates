@@ -35,7 +35,7 @@ class MovesController < ApplicationController
 		request = Net::HTTP::Get.new("/user/activities/daily/20150401?access_token=" + @token)
 
 		response = http.request(request)
-		@body = response.body
+		@body = response.status
 	end
 
 end
