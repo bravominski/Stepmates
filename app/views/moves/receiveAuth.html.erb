@@ -1,2 +1,4 @@
-<h1><%= @code %></h1>
 <div><%= @res %></div>
+<button class="btn btn-default"> 
+	<%= link_to "get data", moves_getdata_path(:token => @code) %>
+</button>
