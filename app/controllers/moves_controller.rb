@@ -28,7 +28,7 @@ class MovesController < ApplicationController
 	def getData
 		@token = params[:token]
 
-		uri = URI.parse("https://api.moves-app.com/api/1.1/")
+		uri = URI.parse("https://api.moves-app.com/api/1.1")
 		http = Net::HTTP.new(uri.host, uri.port)
 		http.use_ssl = true
 
@@ -37,7 +37,6 @@ class MovesController < ApplicationController
 		response = http.request(request)
 		@body = response.body
 		@status = response.status
-
 	end
 
 end
