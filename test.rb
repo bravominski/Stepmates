@@ -1,8 +1,11 @@
-require 'net/http'
+require 'open-uri'
 
-url = URI.parse('http://www.example.com/index.html')
-req = Net::HTTP::Get.new(url.to_s)
-res = Net::HTTP.start(url.host, url.port) {|http|
-	  http.request(req)
-}
-puts res.body
+client_id = "rk4jNeuJ054WTTlYV9l4QF9dYsGdFwdl"
+client_secret = ""
+
+url = URI.parse('https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=' + client_id + '&scope=activity').read
+puts url 
+
+array = url.split('digitgroup')
+puts array[1][2...6] 
+puts array[2][2...6] 
