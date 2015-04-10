@@ -7,5 +7,10 @@ url = URI.parse('https://api.moves-app.com/oauth/v1/authorize?response_type=code
 puts url 
 
 array = url.split('digitgroup')
-puts array[1][2...6] 
-puts array[2][2...6] 
+
+first_code = array[1][2...6]
+second_code = array[2][2...6]
+
+puts first_code 
+puts second_code
+
