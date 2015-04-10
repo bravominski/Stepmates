@@ -9,7 +9,7 @@ class MovesController < ApplicationController
 	end
 
 	def receiveAuth
-		@code = params[:code]
+		code = params[:code]
 		
 		uri = URI.parse('https://api.moves-app.com')
 
@@ -18,7 +18,7 @@ class MovesController < ApplicationController
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 		request = Net::HTTP::Post.new('/oauth/v1/access_token?' + 
-			'grant_type=authorization_code&code=' + @code + '&client_id=rk4jNeuJ054WTTlYV9l4QF9dYsGdFwdl' +
+			'grant_type=authorization_code&code=' + code + '&client_id=rk4jNeuJ054WTTlYV9l4QF9dYsGdFwdl' +
 			'&client_secret=gE8sVNO5MQNTX_tKLMoYtfBSu4QVeOco5x9FW_FSq38v0V14K_OKRTo69TSUpvhW')
 
 		@res = http.request(request)
