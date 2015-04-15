@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   # With given input data from user(this case, user email and password) create and start a new session
   # Checks if there exists a user account corresponding to input and check email/password combination.
   def create
-  	 user = User.find_by(email: params[:session][:email].downcase)
+  	user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to '/patients'
