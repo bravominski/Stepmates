@@ -1,8 +1,8 @@
 <!--Login page(root routing page)-->
 <!--Takes in email and password, if existing user account then create a session for logged in user-->
 <div class="container col-md-12" style="text-align:center">
-<% provide(:title, "Log in") %>
-<h1>Log in</h1>
+  <% provide(:title, "Log in") %>
+  <h1>Welcome to Stepmates!</h1>
 </div>
 <div class="col-md-6 col-md-offset-3">
   <%= form_for(:session, url: login_path) do |f| %>
@@ -14,24 +14,25 @@
     <%= f.password_field :password, :class => "form-control" %>
     <br />
     <%= f.submit "Log in", :class => "btn btn-primary", :style => "width: 100%" %>
+
   <% end %>
+  
   <br />
+  
   <p>New user? 
     <a type="button" data-toggle="modal" data-target="#signup-Modal">
       Sign up now!
     </a><br/>
-    <a>
-      Forget password?
+    <a type="button" data-toggle="modal" data-target="#forgot-password-Modal">
+      Forgot password?
     </a>
   </p>
 </div>
 
 
-<div class="container" style="text-align:center">
-  <button class="btn btn-default col-md-12"> 
+<button class="btn btn-default col-md-12"> 
     <%= link_to "test moves api", moves_getauth_path %>
-  </button> 
-</div>
+</button> 
 
 
 <!-- Modal for signing up-->
@@ -49,9 +50,32 @@
       <div class="modal-body">
         <%= render "users/form_signup" %>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for forgot password-->
+<div class="modal fade" id="forgot-password-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          Forgot your password?
+        </h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+          <label for="exampleInputEmail1">Enter your email address here:</label>
+          <input type="email" class="form-control">
+        </div>
+
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Get password</button>
       </div>
     </div>
   </div>
