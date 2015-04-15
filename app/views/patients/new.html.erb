@@ -6,3 +6,9 @@
 <div class="container">
 	<%= link_to 'Back', '/', :class=>"btn btn-default", :style=>'width:30%; min-width:200px'  %>
 </div>
+
+<div><%= @access_token %></div>
+<div><%= @refresh_token %></div>
+<button class="btn btn-default"> 
+	<%= link_to "get data", moves_getdata_path(:access_token => @access_token, :refresh_token => @refresh_token) %>
+</button>

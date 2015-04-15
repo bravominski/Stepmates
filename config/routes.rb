@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   get 'moves/getauth' => 'moves#getAuth'
-  get 'moves/receiveauth' => 'moves#receiveAuth'
+  get 'moves/patients/new' => 'moves#receiveAuth'
   get 'moves/getdata' => 'moves#getData'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
