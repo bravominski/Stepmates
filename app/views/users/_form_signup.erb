@@ -1,0 +1,31 @@
+<!--Form format to take user input to create a new user account data or to modify one-->
+<%= form_for(@user = User.new) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group container">
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.text_field :email, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.text_field :password, :type=>'password', :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div>
+      <%= f.submit "Sign up", :class=>'btn btn-primary', :style=>'width:30%; min-width:200px' %>
+    </div>
+  </div>
+<% end %>
