@@ -11,20 +11,21 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group container">
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.text_field :email, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.text_field :password, :type=>'password', :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div>
+      <%= f.submit "Sign up", :class=>'btn btn-default', :style=>'width:30%; min-width:200px' %>
+    </div>
   </div>
 <% end %>
