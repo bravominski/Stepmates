@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
   resources :patients
-
   resources :users
 
-  get    'login'   => 'sessions#new'
-  post   'login'   => 'sessions#create'
-  get 'logout'  => 'sessions#destroy'
-  get     'signup' => 'users#new'
+  get    'login'   => 'sessions#new' # login page
+  post   'login'   => 'sessions#create' # pressing login button from login page
+  get 'logout'  => 'sessions#destroy' # logout
+  get     'signup' => 'users#new' # creating a new user account
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'sessions#new'
+  root 'sessions#new' # root of the site(login page)
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
