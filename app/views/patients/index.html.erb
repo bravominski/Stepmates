@@ -2,42 +2,44 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Patients</h1>
+<div class="container col-md-12">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Mrn</th>
-      <th>Dob</th>
-      <th>Email</th>
-      <th>Access token</th>
-      <th>Refresh token</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @patients.each do |patient| %>
+  <table id="mytable" cellspacing="0">
+    <thead>
       <tr>
-        <td><%= patient.name %></td>
-        <td><%= patient.mrn %></td>
-        <td><%= patient.dob %></td>
-        <td><%= patient.email %></td>
-        <td><%= patient.access_token %></td>
-        <td><%= patient.refresh_token %></td>
-        <td><%= link_to 'Show', patient %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th scope="col">Name</th>
+        <th scope="col">Mrn</th>
+        <th scope="col">Dob</th>
+        <th scope="col">Email</th>
+        <th scope="col">Access token</th>
+        <th scope="col">Refresh token</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @patients.each do |patient| %>
+        <tr>
+          <th scope="row" class="spec"><%= patient.name %></td>
+          <td><%= patient.mrn %></td>
+          <td><%= patient.dob %></td>
+          <td><%= patient.email %></td>
+          <td><%= patient.access_token %></td>
+          <td><%= patient.refresh_token %></td>
+          <td><%= link_to 'Individual Data', patient %></td>
+          <td><%= link_to 'Update', edit_patient_path(patient) %></td>
+          <td><%= link_to 'Remove Patient', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<button class="btn btn-default">
-  <%= link_to 'New Patient', new_patient_path %>
-</button>
-<button class="btn btn-default">
-  <%= link_to 'Log Out', logout_path %>
-</button>
+  <br>
+
+  <button class="btn btn-default">
+    <%= link_to 'New Patient', new_patient_path %>
+  </button>
+  <button class="btn btn-default">
+    <%= link_to 'Log Out', logout_path %>
+  </button>
+</div>
