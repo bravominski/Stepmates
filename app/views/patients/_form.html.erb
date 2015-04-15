@@ -30,10 +30,12 @@
     </div>
     <div class="field">
       <%= f.label :access_token %><br>
+      <%= @access_token %>
       <%= f.text_field :access_token, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
     </div>
     <div class="field">
       <%= f.label :refresh_token %><br>
+      <%= @refresh_token %>
       <%= f.text_field :refresh_token, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
     </div>
     <div class="actions">
