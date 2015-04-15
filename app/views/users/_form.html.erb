@@ -24,6 +24,11 @@
       <%= f.label :password %><br>
       <%= f.text_field :password, :type=>'password', :class=>'form-control', :style=>'width:30%; min-width:200px' %>
     </div>
+    <div class="container col-md-6" style="text-align:center">
+      <button class="btn btn-default col-md-12"> 
+        <%= link_to "test moves api", moves_getauth_path %>
+      </button> 
+    </div>
     <div>
       <%= f.submit "Sign up", :class=>'btn btn-default', :style=>'width:30%; min-width:200px' %>
     </div>
