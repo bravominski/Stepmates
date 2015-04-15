@@ -11,32 +11,33 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :mrn %><br>
-    <%= f.text_field :mrn %>
-  </div>
-  <div class="field">
-    <%= f.label :dob %><br>
-    <%= f.text_field :dob %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :access_token %><br>
-    <%= f.text_field :access_token %>
-  </div>
-  <div class="field">
-    <%= f.label :refresh_token %><br>
-    <%= f.text_field :refresh_token %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group container">
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :mrn %><br>
+      <%= f.text_field :mrn, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :dob %><br>
+      <%= f.text_field :dob, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.text_field :email, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :access_token %><br>
+      <%= f.text_field :access_token, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="field">
+      <%= f.label :refresh_token %><br>
+      <%= f.text_field :refresh_token, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Register Patient", :class=>'btn btn-default', :style=>'width:30%; min-width:200px' %>
+    </div>
   </div>
 <% end %>

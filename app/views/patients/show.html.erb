@@ -1,36 +1,32 @@
 <!--Present data for specific patient-->
 <p id="notice"><%= notice %></p>
+<h1>Patient Data for <%= @patient.name%></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @patient.name %>
-</p>
+<table id="mytable" cellspacing="0" summary="The technical
+specifications of the Apple PowerMac G5 series">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">MRN</th>
+    <th scope="col">Date of Birth</th>
+    <th scope="col">Email</th>
+    <th scope="col">Access Token</th>
+    <th scope="col">Refresh Token</th>
+  </tr>
+  <tr>
+    <th scope="row" class="spec"><%= @patient.name %></th>
+    <td><%= @patient.mrn %></td>
+    <td><%= @patient.dob %></td>
+    <td><%= @patient.email %></td>
+    <td><%= @patient.access_token %></td>
+    <td><%= @patient.refresh_token %></td>
+  </tr>
+</table>
 
-<p>
-  <strong>Mrn:</strong>
-  <%= @patient.mrn %>
-</p>
 
-<p>
-  <strong>Dob:</strong>
-  <%= @patient.dob %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @patient.email %>
-</p>
-
-<p>
-  <strong>Access token:</strong>
-  <%= @patient.access_token %>
-</p>
-
-<p>
-  <strong>Refresh token:</strong>
-  <%= @patient.refresh_token %>
-</p>
-
-<%= link_to 'Edit', edit_patient_path(@patient) %>
-<%= link_to 'Back', patients_path %>
+<button class="btn btn-default">
+  <%= link_to 'Edit', edit_patient_path(@patient) %>
+</button>
+<button class="btn btn-default">
+  <%= link_to 'Back', patients_path %>
+</button>
 
