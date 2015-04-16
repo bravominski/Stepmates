@@ -42,7 +42,7 @@
             <% segment_activities_array = segment["activities"] %>
             <% if segment_activities_array != nil %>
               <% segment_activities_array.each do |activity| %>
-                <% if activity["activity"] = "walking" %>
+                <% if activity["steps"] != nil &&  activity["duration"] != nil%>
                   <tr>
                   <% if activity["steps"]/activity["duration"] > 1.4 %>
                     <td style="color:red"><%= activity["activity"]%></td>

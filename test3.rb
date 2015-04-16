@@ -65,15 +65,4 @@ p "duration is " + segment_activity_duration.to_s
 p "distance is " + segment_activity_distance.to_s
 p "number of steps is " + segment_activity_steps.to_s
 
-        <% data["segments"].each do |segment| %>
-          <% segment["activities"].each do |activity| %>
-            <th scope="row" class="spec"></th>
-            <td class="col-md-1"><%= activity["activity"] %></td>
-            <td class="col-md-1"><%= activity["group"] %></td>
-            <td class="col-md-1"><%= activity["startTime"] %></td>
-            <td class="col-md-1"><%= activity["endTime"] %></td>
-            <td class="col-md-1"><%= activity["duration"].to_s %></td>
-            <td class="col-md-1"><%= activity["distance"].to_s %></td>
-            <td class="col-md-1"><%= activity["steps"].to_s %></td>
-          <% end %>
-        <% end %>
+p segment_activity_steps/segment_activity_duration
