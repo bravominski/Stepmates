@@ -21,7 +21,7 @@
 
   <div>
     <% @parsed_data.each do |data| %>
-    <h6><%= data["date"] %></h6>
+    <h5><%= data["date"] %></h5>
     <table>
       <thead>
         <tr>
@@ -36,7 +36,22 @@
         </tr>
       </thead>
       <tbody>
-
+        <% segments_array = data["segments"] %>
+          <% segments_array.each do |segment| %>
+            <% segment_activities_array = segment["activities"] %>
+            <% segment_activities_array.each do |activity| %>
+              <tr>
+              <td><%= activity["activity"] %></td>
+              <td><%= activity["group"] %></td>
+              <td><%= activity["startTime"] %></td>
+              <td><%= activity["endTime"] %></td>
+              <td><%= activity["duration"].to_s %></td>
+              <td><%= activity["distance"].to_s %></td>
+              <td><%= activity["steps"].to_s %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
       </tbody>
     </table>
     <% end %>
