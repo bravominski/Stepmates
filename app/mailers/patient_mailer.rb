@@ -5,4 +5,5 @@ class PatientMailer < ApplicationMailer
 	#	@user = user
 	#	mail(from: @user.email, :to @patient.email, subject:"From your doctor")
 	#end
+
 end
