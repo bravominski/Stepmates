@@ -1,3 +1,14 @@
+nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">
+      Stepmates
+    </a>
+  </div>
+  <button class="btn btn-default navbar-btn navbar-right" style="margin-right: 30px">
+    <%= link_to 'Log Out', logout_path %>
+  </button>
+</nav>
+
 <h1>Editing <%=@patient.name%></h1>
 
 <%= render 'form_edit' %>

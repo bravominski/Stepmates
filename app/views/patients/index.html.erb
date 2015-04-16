@@ -1,3 +1,14 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">
+      Stepmates
+    </a>
+  </div>
+  <button class="btn btn-default navbar-btn navbar-right" style="margin-right: 30px">
+    <%= link_to 'Log Out', logout_path %>
+  </button>
+</nav>
+
 <!--Show all the patient data-->
 <p id="notice"><%= notice %></p>
 
@@ -33,9 +44,6 @@
   <br>
 
   <button class="btn btn-default">
-    <%= link_to 'New Patient', 'moves/getauth' %>
-  </button>
-  <button class="btn btn-default">
-    <%= link_to 'Log Out', logout_path %>
+    <%= link_to 'Back', '/' %>
   </button>
 </div>

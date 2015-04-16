@@ -1,3 +1,14 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">
+      Stepmates
+    </a>
+  </div>
+  <button class="btn btn-default navbar-btn navbar-right" style="margin-right: 30px">
+    <%= link_to 'Log Out', logout_path %>
+  </button>
+</nav>
+
 <div class="container"> 
   <div class="col-md-6 col-md-offset-3" style="text-align: center">
     <h1 style="margin-top:70px"> Hello, <%= @user[:name] %>!</h1>
