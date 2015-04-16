@@ -1,8 +1,9 @@
 <!--Present data for specific patient-->
 <p id="notice"><%= notice %></p>
-<h1>Patient Data for <%= @patient.name%></h1>
 
 <div class="container col-md-12">
+<h1>Patient Data for <%= @patient.name%></h1>
+
   <table style="width:700px">
     <tr>
       <th scope="col">Name</th>
@@ -19,7 +20,8 @@
   </table>
 
   <div>
-    <%= @parsed_data[0]["date"] %>
+    <% @parsed_data.each do |data| %>
+    <%= data["date"] %>
   </div>
 
   <button class="btn btn-default">
