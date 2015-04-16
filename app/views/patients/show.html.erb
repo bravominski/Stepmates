@@ -43,7 +43,7 @@
             <% if segment_activities_array != nil %>
               <% segment_activities_array.each do |activity| %>
                 <tr>
-                <td><%= activity["activity"], :style=>"color: red" %></td>
+                <td><%= activity["activity"], style = "color: red;" %></td>
                 <td><%= activity["group"] %></td>
                 <td><%= activity["startTime"] %></td>
                 <td><%= activity["endTime"] %></td>
