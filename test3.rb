@@ -64,3 +64,5 @@ p segment_activity_end_time
 p "duration is " + segment_activity_duration.to_s
 p "distance is " + segment_activity_distance.to_s
 p "number of steps is " + segment_activity_steps.to_s
+
+p segment_activity_steps/segment_activity_duration
