@@ -1,3 +1,5 @@
+require 'json'
+
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy, :email]
 
@@ -44,7 +46,10 @@ class PatientsController < ApplicationController
 
     @body = response.body
 
-    ########################################
+    @parsed_data = JSON.parse(@body)
+
+
+
   end
 
   # GET /patients/new
