@@ -1,5 +1,5 @@
 <!--Form format to take user input to create a new patient data or to modify one-->
-<%= form_for(@patient=Patient.new) do |f| %>
+<%= form_for(@patient) do |f| %>
   <% if @patient.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
@@ -31,14 +31,16 @@
     </div>
     <div class="field">
       <%= f.label :access_token %><br>
-      <%= f.text_field :access_token, :class=>'form-control', :style=>'width:30%; min-width:200px', :value=>@access_token %>
+      <%= @access_token %>
+      <%= f.text_field :access_token, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
     </div>
     <div class="field">
       <%= f.label :refresh_token %><br>
-      <%= f.text_field :refresh_token, :class=>'form-control', :style=>'width:30%; min-width:200px', :value=>@refresh_token %>
+      <%= @refresh_token %>
+      <%= f.text_field :refresh_token, :class=>'form-control', :style=>'width:30%; min-width:200px' %>
     </div>
     <div class="actions">
-      <%= f.submit "Register Patient", :class=>'btn btn-default', :style=>'width:30%; min-width:200px' %>
+      <%= f.submit "Update Patient Data", :class=>'btn btn-default', :style=>'width:30%; min-width:200px' %>
     </div>
   </div>
 <% end %>
