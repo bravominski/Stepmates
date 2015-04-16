@@ -34,24 +34,22 @@ class PatientsController < ApplicationController
       day_string = day.to_s
     end
 
-    ###### get data with access token ######
+
     access_token = @patient.access_token
 
-    uri = URI.parse("https://api.moves-app.com/api/1.1/user/activities/daily/" +
-      year_string + month_string + "?" + "access_token=" + access_token)
+    uri = URI.parse("https://api.moves-app.com/oauth/v1/tokeninfo?" +
+     "access_token=" + access_token)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(uri.request_uri)
     response = http.request(request)
 
     ###### this is our data that we received ######
-    @body = response.body
-    @parsed_data = JSON.parse(@body)
+    body = response.body
+    validation_response = JSON.parse(body)
 
 
-    ###### if our access token has been expired, we need to refresh it ######
-    if @parsed_data["error"] != nil 
-
+    if validation_response["error"] != nil
       ###### make a post request to the moves api endpoint for refresh tokens  ######
       uri = URI.parse("https://api.moves-app.com")
 
@@ -70,22 +68,22 @@ class PatientsController < ApplicationController
       @patient.access_token = JSON.parse(@res)["access_token"]
       @patient.refresh_token = JSON.parse(@res)["refresh_token"]
       
-
-      ###### make a request for fitness data once again, using new access_token ######
-      access_token = @patient.access_token
-
-      uri = URI.parse("https://api.moves-app.com/api/1.1/user/activities/daily/" +
-        year_string + month_string + "?" + "access_token=" + access_token)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      request = Net::HTTP::Get.new(uri.request_uri)
-      response = http.request(request)
-
-      @body = response.body
-
-      @parsed_data = JSON.parse(@body)
     end
 
+
+
+
+    ###### get data with access token ######
+    uri = URI.parse("https://api.moves-app.com/api/1.1/user/activities/daily/" +
+      year_string + month_string + "?" + "access_token=" + access_token)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+
+    ###### this is our data that we received ######
+    @body = response.body
+    @parsed_data = JSON.parse(@body)
 
   end
 
