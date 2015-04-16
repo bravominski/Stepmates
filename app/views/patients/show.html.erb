@@ -36,15 +36,17 @@
         </tr>
       </thead>
       <tbody>
-        <% data["segments"]["activities"].each do |activity| %>
-          <th scope="row" class="spec"></th>
-          <td class="col-md-1"><%= activity["activity"] %></td>
-          <td class="col-md-1"><%= activity["group"] %></td>
-          <td class="col-md-1"><%= activity["startTime"] %></td>
-          <td class="col-md-1"><%= activity["endTime"] %></td>
-          <td class="col-md-1"><%= activity["duration"].to_s %></td>
-          <td class="col-md-1"><%= activity["distance"].to_s %></td>
-          <td class="col-md-1"><%= activity["steps"].to_s %></td>
+        <% data["segments"].each do |segment| %>
+          <% segment["activities"].each do |activity| %>
+            <th scope="row" class="spec"></th>
+            <td class="col-md-1"><%= activity["activity"] %></td>
+            <td class="col-md-1"><%= activity["group"] %></td>
+            <td class="col-md-1"><%= activity["startTime"] %></td>
+            <td class="col-md-1"><%= activity["endTime"] %></td>
+            <td class="col-md-1"><%= activity["duration"].to_s %></td>
+            <td class="col-md-1"><%= activity["distance"].to_s %></td>
+            <td class="col-md-1"><%= activity["steps"].to_s %></td>
+          <% end %>
         <% end %>
       </tbody>
     </table>
