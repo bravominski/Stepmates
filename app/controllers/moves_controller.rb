@@ -34,7 +34,7 @@ class MovesController < ApplicationController
 
 	def getData
 		access_token = params[:access_token]
-
+		
 		uri = URI.parse("https://api.moves-app.com/api/1.1/user/activities/daily/20150401?" + 
 			"access_token=" + access_token)
 		http = Net::HTTP.new(uri.host, uri.port)
