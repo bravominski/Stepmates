@@ -28,7 +28,7 @@ class MovesController < ApplicationController
 		@access_token = JSON.parse(@res)["access_token"]
 		@refresh_token = JSON.parse(@res)["refresh_token"]
 		
-		render 'moves/receiveAuth'
+		render 'patients/new'
 
 	end
 
