@@ -19,6 +19,8 @@
     </tr>
   </table>
 
+<%= @body %>
+<!--
   <div>
     <% @parsed_data.each do |data| %>
     <h6><%= data["date"] %></h6>
@@ -52,6 +54,8 @@
     </table>
     <% end %>
   </div>
+
+-->
 
   <button class="btn btn-default">
     <%= link_to 'Edit', edit_patient_path(@patient) %>
