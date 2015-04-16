@@ -9,16 +9,12 @@
       <th scope="col">MRN</th>
       <th scope="col">Date of Birth</th>
       <th scope="col">Email</th>
-      <th scope="col">Access Token</th>
-      <th scope="col">Refresh Token</th>
     </tr>
     <tr>
       <th scope="row" class="spec"><%= @patient.name %></th>
-      <td><%= @patient.mrn %></td>
-      <td><%= @patient.dob %></td>
-      <td><%= @patient.email %></td>
-      <td><%= @patient.access_token %></td>
-      <td><%= @patient.refresh_token %></td>
+      <td class="col-md-3"><%= @patient.mrn %></td>
+      <td class="col-md-3"><%= @patient.dob %></td>
+      <td class="col-md-3"><%= @patient.email %></td>
     </tr>
   </table>
 

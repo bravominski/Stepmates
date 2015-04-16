@@ -1,6 +1,12 @@
 <h1>Editing <%=@patient.name%></h1>
 
-<%= render 'form' %>
+<%= render 'form_edit' %>
 
-<%= link_to 'Show', @patient %> |
-<%= link_to 'Back', patients_path %>
+<div class="container">
+	<button class="btn btn-default">
+		<%= link_to 'Show', @patient %> 
+	</button>
+	<button class="btn btn-default">
+		<%= link_to 'Back', patients_path %>
+	</button>
+</div>
