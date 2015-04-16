@@ -3,6 +3,6 @@
     <h1 style="margin-top:70px"> Hello, <%= @user[:name] %>!</h1>
     <br/>
     <%= link_to "See Patients", patients_path, :class=>"btn btn-info", :style=>"width:100%; margin-top:10px"  %>
-    <%= link_to "Add Patient", 'moves/getauth', :class=>"btn btn-default", :style=>"width:100%; margin-top:10px" %>
+    <%= link_to "Add Patient", 'https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=rk4jNeuJ054WTTlYV9l4QF9dYsGdFwdl&scope=activity', :class=>"btn btn-default", :style=>"width:100%; margin-top:10px" %>
   </div>
 </div>
