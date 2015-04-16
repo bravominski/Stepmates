@@ -71,6 +71,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
+        PatientMailer.welcome_email(@patient).deliver_now
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
         format.json { render :show, status: :created, location: @patient }
       else
