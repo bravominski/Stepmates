@@ -65,26 +65,6 @@ p "duration is " + segment_activity_duration.to_s
 p "distance is " + segment_activity_distance.to_s
 p "number of steps is " + segment_activity_steps.to_s
 
-
-
-<!--
-  <div>
-    <% @parsed_data.each do |data| %>
-    <h6><%= data["date"] %></h6>
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Activity</th>
-          <th scope="col">Group</th>
-          <th scope="col">Start Time</th>
-          <th scope="col">End Time</th>
-          <th scope="col">Duration</th>
-          <th scope="col">Distance</th>
-          <th scope="col">Steps</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <tbody>
         <% data["segments"].each do |segment| %>
           <% segment["activities"].each do |activity| %>
             <th scope="row" class="spec"></th>
@@ -97,9 +77,3 @@ p "number of steps is " + segment_activity_steps.to_s
             <td class="col-md-1"><%= activity["steps"].to_s %></td>
           <% end %>
         <% end %>
-      </tbody>
-    </table>
-    <% end %>
-  </div>
-
--->
