@@ -50,7 +50,7 @@ class PatientsController < ApplicationController
 
 
     ###### if our access token has been expired, we need to refresh it ######
-    if parsed_data["error"] != nil 
+    if @parsed_data["error"] != nil 
 
       ###### make a post request to the moves api endpoint for refresh tokens  ######
       uri = URI.parse("https://api.moves-app.com")
