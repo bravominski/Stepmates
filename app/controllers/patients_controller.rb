@@ -12,6 +12,20 @@ class PatientsController < ApplicationController
   # GET /patients/1.json
   # Show specific object in Patient database
   def show
+
+    ###### get data with access token ######
+    access_token = @patient.access_token
+
+    uri = URI.parse("https://api.moves-app.com/api/1.1/user/activities/daily/20150401?" + 
+      "access_token=" + access_token)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+
+    @body = response.body
+
+    ########################################
   end
 
   # GET /patients/new
