@@ -23,28 +23,43 @@
           <% segments_array = data["segments"] %>
             <% if segments_array != nil %>
               <h5><%= data["date"] %></h5>
-                <% segments_array.each do |segment| %>
-                  <% segment_activities_array = segment["activities"] %>
-                  <% if segment_activities_array != nil %>
-                    <% segment_activities_array.each do |activity| %>
-                      <% if activity["steps"] != nil &&  activity["duration"] != nil%>
-                        <div>
-                        <% if activity["steps"]/activity["duration"] > 1.4 %>
-                          <div style="color:red"><%= activity["activity"]%></div>
-                        <% else %>
-                          <div class="col-md-1"><%= activity["activity"]%></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Activity</th>
+                      <th scope="col">Start Time</th>
+                      <th scope="col">End Time</th>
+                      <th scope="col">Duration</th>
+                      <th scope="col">Distance</th>
+                      <th scope="col">Steps</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% segments_array.each do |segment| %>
+                      <% segment_activities_array = segment["activities"] %>
+                      <% if segment_activities_array != nil %>
+                        <% segment_activities_array.each do |activity| %>
+                          <% if activity["steps"] != nil &&  activity["duration"] != nil%>
+                            <tr>
+                            <% if activity["steps"]/activity["duration"] > 1.4 %>
+                              <td style="color:red"><%= activity["activity"]%></td>
+                            <% else %>
+                              <td><%= activity["activity"]%></td>
+                            <% end %>
+                              <td><%= activity["startTime"] %></td>
+                              <td><%= activity["endTime"] %></td>
+                              <td><%= activity["duration"].to_s %></td>
+                              <td><%= activity["distance"].to_s %></td>
+                              <td><%= activity["steps"].to_s %></td>
+                            </tr>
+                          <% end %>
                         <% end %>
-                          <div class="col-md-1"><%= activity["startTime"] %></div>
-                          <div class="col-md-1"><%= activity["endTime"] %></div>
-                          <div class="col-md-1"><%= activity["duration"].to_s %></div>
-                          <div class="col-md-1"><%= activity["distance"].to_s %></div>
-                          <div class="col-md-1"><%= activity["steps"].to_s %></div>
-                        </div>
                       <% end %>
                     <% end %>
-                  <% end %>
-                <% end %>
-            <% end %>
+                    <% end %>
+                  </tbody>
+                </table>
         <% end %>
       </div>
     </div>
