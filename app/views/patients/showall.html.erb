@@ -32,13 +32,13 @@
                         <% if activity["steps"]/activity["duration"] > 1.4 %>
                           <div style="color:red"><%= activity["activity"]%></div>
                         <% else %>
-                          <div><%= activity["activity"]%></div>
+                          <div class="col-md-1"><%= activity["activity"]%></div>
                         <% end %>
-                          <div><%= activity["startTime"] %></div>
-                          <div><%= activity["endTime"] %></div>
-                          <div><%= activity["duration"].to_s %></div>
-                          <div><%= activity["distance"].to_s %></div>
-                          <div><%= activity["steps"].to_s %></div>
+                          <div class="col-md-1"><%= activity["startTime"] %></div>
+                          <div class="col-md-1"><%= activity["endTime"] %></div>
+                          <div class="col-md-1"><%= activity["duration"].to_s %></div>
+                          <div class="col-md-1"><%= activity["distance"].to_s %></div>
+                          <div class="col-md-1"><%= activity["steps"].to_s %></div>
                         </div>
                       <% end %>
                     <% end %>
