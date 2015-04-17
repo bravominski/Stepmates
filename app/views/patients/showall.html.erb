@@ -17,8 +17,51 @@
   <% @patients.each do |patient| %>
     <div class="col-md-4" style="text-align:center;border:1px solid black;min-height:250px;padding:10px">
       <%= patient.name %>
-      <% data = showData(patient) %>
-      <%= data %>
+      <% parsed_data = showData(patient) %>
+      <div>
+        <% parsed_data.each do |data| %>
+          <% segments_array = data["segments"] %>
+            <% if segments_array != nil %>
+              <h5><%= data["date"] %></h5>
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Activity</th>
+                      <th scope="col">Start Time</th>
+                      <th scope="col">End Time</th>
+                      <th scope="col">Duration</th>
+                      <th scope="col">Distance</th>
+                      <th scope="col">Steps</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% segments_array.each do |segment| %>
+                      <% segment_activities_array = segment["activities"] %>
+                      <% if segment_activities_array != nil %>
+                        <% segment_activities_array.each do |activity| %>
+                          <% if activity["steps"] != nil &&  activity["duration"] != nil%>
+                            <tr>
+                            <% if activity["steps"]/activity["duration"] > 1.4 %>
+                              <td style="color:red"><%= activity["activity"]%></td>
+                            <% else %>
+                              <td><%= activity["activity"]%></td>
+                            <% end %>
+                              <td><%= activity["startTime"] %></td>
+                              <td><%= activity["endTime"] %></td>
+                              <td><%= activity["duration"].to_s %></td>
+                              <td><%= activity["distance"].to_s %></td>
+                              <td><%= activity["steps"].to_s %></td>
+                            </tr>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    <% end %>
+                  </tbody>
+                </table>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
