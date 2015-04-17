@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post    'login'   => 'sessions#create' # pressing login button from login page
   get     'logout'  => 'sessions#destroy' # logout
   get     'signup' => 'users#new' # creating a new user account
-
+  get     'showall' => 'moves#showall' #showing all patient data
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
