@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">
+      Stepmates
+    </a>
+  </div>
+  <button class="btn btn-default navbar-btn navbar-right" style="margin-right: 30px">
+    <%= link_to 'Log Out', logout_path %>
+  </button>
+</nav>
+
+<!--Show all the patient data-->
+<p id="notice"><%= notice %></p>
+<div class="container col-md-12">
+<h1>All Patient Data</h1>
+
+  <% @patients.each do |patient| %>
+    <div class="col-md-4" style="text-align:center;border:1px solid black;min-height:250px;padding:10px">
+      <%= patient.name %>
+      <% data = showData(patient) %>
+      <%= data %>
+    </div>
+  <% end %>
+</div>
+
+<div class="container">
+  <button class="btn btn-default" style="margin-top:70px">
+    <%= link_to 'Back', '/' %>
+  </button>
+</div>

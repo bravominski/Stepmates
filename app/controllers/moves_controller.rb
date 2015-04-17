@@ -46,4 +46,9 @@ class MovesController < ApplicationController
 
 	end
 
+
+	def showall
+		@patients = Patient.all
+		render 'patients/showall'
+	end
 end

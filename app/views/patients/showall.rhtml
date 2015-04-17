@@ -1,0 +1,84 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">
+      Stepmates
+    </a>
+  </div>
+  <button class="btn btn-default navbar-btn navbar-right" style="margin-right: 30px">
+    <%= link_to 'Log Out', logout_path %>
+  </button>
+</nav>
+
+<!--Present data for specific patient-->
+<p id="notice"><%= notice %></p>
+
+<div class="container col-md-12">
+<h1>Patient Data for <%= @patient.name%></h1>
+
+  <table style="width:700px">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">MRN</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Email</th>
+    </tr>
+    <tr>
+      <th scope="row" class="spec"><%= @patient.name %></th>
+      <td class="col-md-3"><%= @patient.mrn %></td>
+      <td class="col-md-3"><%= @patient.dob %></td>
+      <td class="col-md-3"><%= @patient.email %></td>
+    </tr>
+  </table>
+
+  <div>
+    <% @parsed_data.each do |data| %>
+      <% segments_array = data["segments"] %>
+        <% if segments_array != nil %>
+          <h5><%= data["date"] %></h5>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Activity</th>
+                  <th scope="col">Start Time</th>
+                  <th scope="col">End Time</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Distance</th>
+                  <th scope="col">Steps</th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% segments_array.each do |segment| %>
+                  <% segment_activities_array = segment["activities"] %>
+                  <% if segment_activities_array != nil %>
+                    <% segment_activities_array.each do |activity| %>
+                      <% if activity["steps"] != nil &&  activity["duration"] != nil%>
+                        <tr>
+                        <% if activity["steps"]/activity["duration"] > 1.4 %>
+                          <td style="color:red"><%= activity["activity"]%></td>
+                        <% else %>
+                          <td><%= activity["activity"]%></td>
+                        <% end %>
+                          <td><%= activity["startTime"] %></td>
+                          <td><%= activity["endTime"] %></td>
+                          <td><%= activity["duration"].to_s %></td>
+                          <td><%= activity["distance"].to_s %></td>
+                          <td><%= activity["steps"].to_s %></td>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <% end %>
+              </tbody>
+            </table>
+    <% end %>
+  </div>
+
+  <button class="btn btn-default">
+    <%= link_to 'Edit', edit_patient_path(@patient) %>
+  </button>
+  <button class="btn btn-default">
+    <%= link_to 'Back', patients_path %>
+  </button>
+</div>
