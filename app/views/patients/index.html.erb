@@ -11,9 +11,15 @@
 
 <!--Show all the patient data-->
 <p id="notice"><%= notice %></p>
-
 <div class="container col-md-12">
 <h1>Listing Patients</h1>
+
+<%= form_tag patients_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search], :placeholder => "Please Enter a Name" %>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
+  </p>
+<% end %>
 
   <table id="mytable" cellspacing="0">
     <thead>
@@ -30,11 +36,11 @@
       <% @patients.each do |patient| %>
         <tr>
           <th scope="row" class="spec"><%= patient.name %></td>
-          <td class="col-md-1"><%= patient.mrn %></td>
+          <td class="col-md-2"><%= patient.mrn %></td>
           <td class="col-md-1"><%= patient.dob %></td>
           <td class="col-md-2"><%= patient.email %></td>
           <td class="col-md-2"><%= link_to 'Individual Data', patient %></td>
-          <td class="col-md-2"><%= link_to 'Update Patient', edit_patient_path(patient) %></td>
+          <td class="col-md-1"><%= link_to 'Update', edit_patient_path(patient) %></td>
           <td class="col-md-2"><%= link_to 'Remove Patient', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
