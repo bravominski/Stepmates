@@ -7,7 +7,11 @@ class PatientsController < ApplicationController
   # GET /patients.json
   # Show the entire list of Patient database
   def index
-    @patients = Patient.search(params[:search])
+    if params[:search]
+      @patients = Patient.search(params[:search])
+    else
+      @patients = Patient.all
+    end
   end
 
   # GET /patients/1
