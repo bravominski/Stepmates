@@ -9,12 +9,14 @@
   </button>
 </nav>
 
-<%= form_tag patients_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
+<form class="navbar-form navbar-left" role="search">
+  <%= form_tag patients_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
+</form>
 
 <!--Show all the patient data-->
 <p id="notice"><%= notice %></p>
