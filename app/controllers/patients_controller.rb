@@ -1,7 +1,7 @@
 require 'json'
 
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:show, :edit, :update, :destroy, :email]
+  before_action :set_patient, only: [:show, :edit, :update, :destroy, :custom_email, :send_email]
 
   # GET /patients
   # GET /patients.json
@@ -103,10 +103,10 @@ class PatientsController < ApplicationController
   # Same as using "new" first and then "save". With given information, new patient is registered in the database
   def create
     @patient = Patient.new(patient_params)
-
+    @user = current_user
     respond_to do |format|
       if @patient.save
-        #PatientMailer.welcome_email(@patient).deliver_now
+        PatientMailer.welcome_email(@user, @patient).deliver_now
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
         format.json { render :show, status: :created, location: @patient }
       else
@@ -140,6 +140,16 @@ class PatientsController < ApplicationController
       format.html { redirect_to patients_url, notice: 'Patient was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def custom_email
+  end
+
+  def send_email
+      @user = current_user
+      message = params[:custom_email][:message]
+      PatientMailer.custom_email(@user, @patient, message).deliver_now
+      redirect_to @patient, :notice => "Email sent!"
   end
 
   private

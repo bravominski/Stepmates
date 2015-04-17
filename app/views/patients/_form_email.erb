@@ -1,0 +1,13 @@
+<%= form_for :custom_email, :url => custom_email_patient_path(@patient), :html => {:method => :post} do |f| %>
+                   
+	<div class="form-group container">
+    		<div class="field">   
+		     <%= f.label :message%><br>
+		     <%= f.text_area :message, :class=>'form-control', :style=>'width:30%; min-width:200px; height:50%; min-height:400px' %>
+		 </div>
+		 <div class="action">
+		     <%= f.submit "Send Email" %>
+		 </div>
+	</div>
+
+<% end %>
