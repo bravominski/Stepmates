@@ -21,12 +21,14 @@
       <th scope="col">MRN</th>
       <th scope="col">Date of Birth</th>
       <th scope="col">Email</th>
+      <th scope="col"></th>
     </tr>
     <tr>
       <th scope="row" class="spec"><%= @patient.name %></th>
-      <td class="col-md-3"><%= @patient.mrn %></td>
-      <td class="col-md-3"><%= @patient.dob %></td>
+      <td class="col-md-2"><%= @patient.mrn %></td>
+      <td class="col-md-2"><%= @patient.dob %></td>
       <td class="col-md-3"><%= @patient.email %></td>
+      <td class="col-md-2"><%= link_to 'Email Patient', custom_email_patient_path(@patient) %></td>
     </tr>
   </table>
 
