@@ -17,7 +17,7 @@
   <% @patients.each do |patient| %>
     <div class="col-md-4" style="text-align:center;border:1px solid black;min-height:250px;padding:10px">
       <%= patient.name %>
-      <% data = show(patient) %>
+      <% data = @patients_controller.showData(patient) %>
       <%= data %>
     </div>
   <% end %>

@@ -17,7 +17,7 @@ class PatientsController < ApplicationController
   # GET /patients/1
   # GET /patients/1.json
   # Show specific object in Patient database
-  def show (patient)
+  def showData (patient)
 
     ##### set up time #####
     time = Time.new
