@@ -4,7 +4,7 @@ class Patient < ActiveRecord::Base
   		if search
     		find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
   		else
-    		Patient.all
+    		find(:all)
     	end
     end
 end
