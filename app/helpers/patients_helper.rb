@@ -1,8 +1,8 @@
 module PatientsHelper
 
-  # GET /patients/1
-  # GET /patients/1.json
-  # Show specific object in Patient database
+  ##### this is the method used in patient_controller for fetching data, except 
+  ##### it must be accessed from a view, so it has been added to a helper
+  ##### in addition, it needs to specify a patient as a parameter.
   def showData(patient)
 
     ##### set up time #####
@@ -10,14 +10,12 @@ module PatientsHelper
     year = time.year
     month = time.month
     day = time.day
-
     year_string = year.to_s
     if month < 10
       month_string = "0" + month.to_s
     else
       month_string = month.to_s
     end
-
     if day < 10
       day_string = "0" + day.to_s
     else
@@ -27,6 +25,7 @@ module PatientsHelper
 
     access_token = patient.access_token
 
+    ##### make a get request to moves api endpoint using our access token #####
     uri = URI.parse("https://api.moves-app.com/oauth/v1/tokeninfo?" +
      "access_token=" + access_token)
     http = Net::HTTP.new(uri.host, uri.port)
@@ -38,11 +37,10 @@ module PatientsHelper
     body = response.body
     validation_response = JSON.parse(body)
 
-
+    ##### check if there is an error #####
     if validation_response["error"] != nil
       ###### make a post request to the moves api endpoint for refresh tokens  ######
       uri = URI.parse("https://api.moves-app.com")
-
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
