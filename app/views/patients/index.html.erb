@@ -9,17 +9,17 @@
   </button>
 </nav>
 
+<!--Show all the patient data-->
+<p id="notice"><%= notice %></p>
+<div class="container col-md-12">
+<h1>Listing Patients</h1>
+
 <%= form_tag patients_path, :method => 'get' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
   </p>
 <% end %>
-
-<!--Show all the patient data-->
-<p id="notice"><%= notice %></p>
-<div class="container col-md-12">
-<h1>Listing Patients</h1>
 
   <table id="mytable" cellspacing="0">
     <thead>
