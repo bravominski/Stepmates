@@ -16,7 +16,7 @@
 
 <%= form_tag patients_path, :method => 'get' do %>
   <p>
-    <%= text_field_tag :search, params[:search], :placeholder => "Please Enter a Name" %>
+    <%= text_field_tag :search, params[:search], :placeholder => "Please Enter a Name or MRN" %>
     <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
   </p>
 <% end %>
