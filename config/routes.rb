@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :patients
   resources :users
-  resources :password_resets
+  resources :passwrod_resets
 
   get     'graph_data' => 'patients#data', :defaults => { :format => 'json' }
   get     'login'   => 'sessions#new' # login page

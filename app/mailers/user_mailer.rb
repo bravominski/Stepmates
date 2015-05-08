@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
 		mail(to: @user.email, subject: "Welcome to our app!")
 	end
 
-	def password_reset(user)
+	def passwrod_reset(user)
 		@suer = user
 		mail :to => user.email, :subject => "Here is your password!"
 	end
