@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
 
   def self.search(search)
     if search
-      # where('email ILIKE ?', "%#{search}%")
-      temp_user = User.find_by email: search
-      puts temp_user.password
+      where('email ILIKE ?', "%#{search}%")
+      #temp_user = User.find_by email: search
+      #puts temp_user.password
     else
       
     end
