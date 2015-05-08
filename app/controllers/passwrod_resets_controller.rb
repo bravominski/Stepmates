@@ -5,6 +5,6 @@ class PasswrodResetsController < ApplicationController
   def create
   	user = User.find_by_email(params[:email])
   	UserMailer.passwrod_reset(user).deliver if user
-  	redirect_to root_url, :notice => "Email sent with your password!"
+  	redirect_to '/', :notice => "Email sent with your password!"
   end
 end
