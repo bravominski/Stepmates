@@ -16,15 +16,6 @@
 <h1>Patient Data for <%= @patient.name%></h1>
   <div id="chart">
   </div>
-  <style type="text/css">
-    div.bar {
-      display: inline-block;
-      width: 20px;
-      height: 75px; /* Gets overriden by D3-assigned height below */
-      margin-right: 2px;
-      color: red;
-    }
-  </style>
   <script>
 
       //Width and height
@@ -1047,49 +1038,44 @@
                   .attr("width", w)
                   .attr("height", h);
 
-
-      svg.selectAll("rect")
-        .data(monthdata)
-        .enter()
-        .append("rect")
-        .attr("x", function(d, i) {
-          return i * (w/31);  //Bar width of 20 plus 2 for padding
-        })
-        .attr("y", function(d) {
-          var ret;
-          if (d.summary == null) {
-            return h-0;
-          }
-
-          d.summary.forEach(function(array_element){
-            console.log(array_element.activity);
-            if ((array_element.activity === "walking") || (array_element.activity === "running")) {
-              console.log("y is:");
-              console.log(array_element.steps);
-              ret = (array_element.steps/20);
-            }
+      function fill_graph(dataSet) {
+        for (var i = 0; i < dataSet.length; i++) {
+          svg.append("rect")
+          .attr("x", function(i) {
+          return i * (w/31);
           })
-          return h-ret;
-        })
-        .attr("width", ((w/31) - (barPadding)))
-        .attr("height", function(d){
-          var ret;
-          if (d.summary == null) {
-            return 0;
-          }
-          d.summary.forEach(function(array_element){
-            console.log(array_element.activity);
-            if ((array_element.activity === "walking") || (array_element.activity === "running")) {
-              console.log("height is:");
-              console.log(array_element.steps);
-
-              ret = (array_element.steps)/20;
-
+          .attr("y", function() {
+            var ret;
+            var summary = dataSet[i].summary;
+            if (summary == null) {
+              return 0;
             }
+            for (var j = 0; j < summary.length; j++) {
+              var element = summary[j];
+              if (element.activity == 'walking' || element.activity == 'running') {
+                ret = ret + element.steps;
+              }
+            }
+            return (h - ret/20);
           })
-          return ret;
-        })
-        .attr("fill", "#2ecc71");
+          .attr("width", ((w/31) - (barPadding)))
+          .attr("height", function(){
+            var ret;
+            var summary = dataSet[i].summary;
+            if (summary == null) {
+              return 0;
+            }
+            for (var j = 0; j < summary.length; j++) {
+              var element = summary[j];
+              if (element.activity == 'walking' || element.activity == 'running') {
+                ret = ret + element.steps;
+              }
+            }
+            return ret/20;
+          })
+          .attr("fill", "#2ecc71");
+        }
+      }
 
   </script>
   <table style="width:700px">
