@@ -6,7 +6,7 @@
   <body>
     <h1>Here is your password as requested! <%= @user.name %></h1>
     <p>
-      Here is your password:  <%= @user.password %><br>
+      Here is your password:  <%= request.request_parameters[:user][:password] %><br>
     </p>
     <p>Thanks and have a great day!</p>
   </body>
