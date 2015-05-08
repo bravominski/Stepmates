@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
 	end
 
 	def passwrod_reset(user)
-		@suer = user
+		@user = user
 		mail :to => user.email, :subject => "Here is your password!"
 	end
 end
