@@ -63,7 +63,7 @@
       <div class="modal-body">
         <%= form_tag users_path, :method => 'get' do %>
           <div>
-            <%= text_field_tag :search, params[:search], :placeholder => "Enter your email address here" %>
+            <%= text_field_tag :search, params[:search], :placeholder => "Enter your email address" %>
           </div>
         <% end %>
 
@@ -71,9 +71,9 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <%= form_tag users_path, :method => 'get' do %>
-          <p>
+          <div>
             <%= submit_tag "Get Password", :email => nil, class: "btn btn-lg btn-primary" %>
-          </p>
+          </div>
         <% end %>
 
       </div>
