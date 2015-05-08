@@ -10,4 +10,5 @@ class UserMailer < ApplicationMailer
 	def password_reset(user)
 		@suer = user
 		mail :to => user.email, :subject => "Here is your password!"
+	end
 end
