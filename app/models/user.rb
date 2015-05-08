@@ -15,4 +15,13 @@ class User < ActiveRecord::Base
   has_secure_password
   # Once pass the has_secure_password test, check the length to be minimum 6 characters
   validates :password, length: { minimum: 6 }
+
+  def self.search(search)
+    if search
+      where('email ILIKE ?', "%#{search}%")
+    else
+      
+    end
+  end
+
 end

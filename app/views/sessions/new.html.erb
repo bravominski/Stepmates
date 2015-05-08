@@ -61,15 +61,21 @@
         </h4>
       </div>
       <div class="modal-body">
-         <div class="form-group">
-          <label for="exampleInputEmail1">Enter your email address here:</label>
-          <input type="email" class="form-control">
-        </div>
+        <%= form_tag users_path, :method => 'get' do %>
+          <div>
+            <%= text_field_tag :search, params[:search], :placeholder => "Enter your email address here" %>
+          </div>
+        <% end %>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Get password</button>
+        <%= form_tag users_path, :method => 'get' do %>
+          <p>
+            <%= submit_tag "Get Password", :email => nil, class: "btn btn-lg btn-primary" %>
+          </p>
+        <% end %>
+
       </div>
     </div>
   </div>
