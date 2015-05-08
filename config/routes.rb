@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :patients
   resources :users
 
+  get     'graph_data' => 'patients#data', :defaults => { :format => 'json' }
   get     'login'   => 'sessions#new' # login page
   post    'login'   => 'sessions#create' # pressing login button from login page
   get     'logout'  => 'sessions#destroy' # logout

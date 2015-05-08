@@ -12,9 +12,1088 @@
 <!--Present data for specific patient-->
 <p id="notice"><%= notice %></p>
 
-<div class="container col-md-12">
+<div class="container col-md-12"  onload="myFunction()">
 <h1>Patient Data for <%= @patient.name%></h1>
-  <%= image_tag(@line_chart) %>
+  <div id="chart">
+  </div>
+  <style type="text/css">
+    div.bar {
+      display: inline-block;
+      width: 20px;
+      height: 75px; /* Gets overriden by D3-assigned height below */
+      margin-right: 2px;
+      color: red;
+    }
+  </style>
+  <script>
+
+      //Width and height
+      var w = 1000;
+      var h = 500;
+      var barPadding = 2;
+
+      //data
+      var monthdata = 
+      [{
+        "date": "20150501",
+        "summary": 
+        [{
+          "activity": "walking",
+          "group": "walking",
+          "duration": 5493.0,
+          "distance": 6227.0,
+          "steps": 7581
+        }, {
+          "activity": "cycling",
+          "group": "cycling",
+          "duration": 123.0,
+          "distance": 286.0
+        }],
+        "segments": 
+        [{
+          "type": "move",
+          "startTime": "20150501T000126-0400",
+          "endTime": "20150501T001010-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T000126-0400",
+            "endTime": "20150501T001010-0400",
+            "duration": 524.0,
+            "distance": 795.0,
+            "steps": 776
+          }],
+          "lastUpdate": "20150501T054603Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T044946-0400",
+          "endTime": "20150501T050008-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T044946-0400",
+            "endTime": "20150501T050008-0400",
+            "duration": 622.0,
+            "distance": 593.0,
+            "steps": 797
+          }],
+          "lastUpdate": "20150501T133401Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T050008-0400",
+          "endTime": "20150501T113953-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T094450-0400",
+            "endTime": "20150501T094520-0400",
+            "duration": 30.0,
+            "distance": 15.0,
+            "steps": 30
+          }],
+          "lastUpdate": "20150501T181456Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T113954-0400",
+          "endTime": "20150501T114703-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T114300-0400",
+            "endTime": "20150501T114330-0400",
+            "duration": 30.0,
+            "distance": 25.0,
+            "steps": 51
+          }],
+          "lastUpdate": "20150501T181456Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T114703-0400",
+          "endTime": "20150501T115639-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T114703-0400",
+            "endTime": "20150501T115639-0400",
+            "duration": 576.0,
+            "distance": 764.0,
+            "steps": 1002
+          }],
+          "lastUpdate": "20150501T181456Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T115639-0400",
+          "endTime": "20150501T142714-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T120035-0400",
+            "endTime": "20150501T120353-0400",
+            "duration": 198.0,
+            "distance": 160.0,
+            "steps": 213
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T132841-0400",
+            "endTime": "20150501T132941-0400",
+            "duration": 60.0,
+            "distance": 51.0,
+            "steps": 102
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T140228-0400",
+            "endTime": "20150501T140728-0400",
+            "duration": 300.0,
+            "distance": 225.0,
+            "steps": 235
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T142714-0400",
+          "endTime": "20150501T143316-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T142714-0400",
+            "endTime": "20150501T143316-0400",
+            "duration": 362.0,
+            "distance": 329.0,
+            "steps": 401
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T143316-0400",
+          "endTime": "20150501T143555-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T143406-0400",
+            "endTime": "20150501T143436-0400",
+            "duration": 30.0,
+            "distance": 26.0,
+            "steps": 51
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T143555-0400",
+          "endTime": "20150501T144058-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T143555-0400",
+            "endTime": "20150501T144058-0400",
+            "duration": 303.0,
+            "distance": 334.0,
+            "steps": 518
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T144058-0400",
+          "endTime": "20150501T145632-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T144837-0400",
+            "endTime": "20150501T144937-0400",
+            "duration": 60.0,
+            "distance": 46.0,
+            "steps": 91
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T145632-0400",
+          "endTime": "20150501T150910-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T145632-0400",
+            "endTime": "20150501T150911-0400",
+            "duration": 759.0,
+            "distance": 954.0,
+            "steps": 1210
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T150911-0400",
+          "endTime": "20150501T151831-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T151308-0400",
+            "endTime": "20150501T151338-0400",
+            "duration": 30.0,
+            "distance": 26.0,
+            "steps": 51
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T151831-0400",
+          "endTime": "20150501T152354-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T151831-0400",
+            "endTime": "20150501T152354-0400",
+            "duration": 323.0,
+            "distance": 445.0,
+            "steps": 535
+          }],
+          "lastUpdate": "20150501T211818Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T193918-0400",
+          "endTime": "20150501T194300-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T193918-0400",
+            "endTime": "20150501T194300-0400",
+            "duration": 222.0,
+            "distance": 289.0,
+            "steps": 270
+          }],
+          "lastUpdate": "20150502T002922Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T194300-0400",
+          "endTime": "20150501T195725-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T194419-0400",
+            "endTime": "20150501T194619-0400",
+            "duration": 120.0,
+            "distance": 161.0,
+            "steps": 214
+          }],
+          "lastUpdate": "20150502T002922Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T195725-0400",
+          "endTime": "20150501T195927-0400",
+          "activities": [{
+            "activity": "cycling",
+            "group": "cycling",
+            "manual": false,
+            "startTime": "20150501T195725-0400",
+            "endTime": "20150501T195928-0400",
+            "duration": 123.0,
+            "distance": 286.0
+          }],
+          "lastUpdate": "20150502T002922Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T195927-0400",
+          "endTime": "20150501T221536-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T195956-0400",
+            "endTime": "20150501T200057-0400",
+            "duration": 61.0,
+            "distance": 41.0,
+            "steps": 82
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T210406-0400",
+            "endTime": "20150501T210539-0400",
+            "duration": 93.0,
+            "distance": 74.0,
+            "steps": 148
+          }],
+          "lastUpdate": "20150502T033525Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T221536-0400",
+          "endTime": "20150501T221839-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T221536-0400",
+            "endTime": "20150501T221839-0400",
+            "duration": 183.0,
+            "distance": 220.0,
+            "steps": 156
+          }],
+          "lastUpdate": "20150502T033525Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T221839-0400",
+          "endTime": "20150501T233736-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T221946-0400",
+            "endTime": "20150501T222446-0400",
+            "duration": 300.0,
+            "distance": 307.0,
+            "steps": 409
+          }],
+          "lastUpdate": "20150502T050756Z"
+        }, {
+          "type": "move",
+          "startTime": "20150501T233736-0400",
+          "endTime": "20150501T234143-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T233736-0400",
+            "endTime": "20150501T234143-0400",
+            "duration": 247.0,
+            "distance": 296.0,
+            "steps": 137
+          }],
+          "lastUpdate": "20150502T050756Z"
+        }, {
+          "type": "place",
+          "startTime": "20150501T234143-0400",
+          "endTime": "20150502T174853-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150501T234438-0400",
+            "endTime": "20150501T234538-0400",
+            "duration": 60.0,
+            "distance": 51.0,
+            "steps": 102
+          }],
+          "lastUpdate": "20150502T221848Z"
+        }],
+        "lastUpdate": "20150502T221848Z"
+      }, {
+        "date": "20150502",
+        "summary": [{
+          "activity": "walking",
+          "group": "walking",
+          "duration": 1622.0,
+          "distance": 1691.0,
+          "steps": 2531
+        }],
+        "segments": [{
+          "type": "place",
+          "startTime": "20150501T234143-0400",
+          "endTime": "20150502T174853-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150502T174654-0400",
+            "endTime": "20150502T174754-0400",
+            "duration": 60.0,
+            "distance": 46.0,
+            "steps": 92
+          }],
+          "lastUpdate": "20150502T221848Z"
+        }, {
+          "type": "move",
+          "startTime": "20150502T174853-0400",
+          "endTime": "20150502T175927-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150502T174853-0400",
+            "endTime": "20150502T175928-0400",
+            "duration": 635.0,
+            "distance": 553.0,
+            "steps": 803
+          }],
+          "lastUpdate": "20150502T221848Z"
+        }, {
+          "type": "place",
+          "startTime": "20150502T175928-0400",
+          "endTime": "20150502T212520-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150502T191851-0400",
+            "endTime": "20150502T191921-0400",
+            "duration": 30.0,
+            "distance": 26.0,
+            "steps": 51
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150502T204945-0400",
+            "endTime": "20150502T205215-0400",
+            "duration": 150.0,
+            "distance": 200.0,
+            "steps": 267
+          }],
+          "lastUpdate": "20150503T025538Z"
+        }, {
+          "type": "move",
+          "startTime": "20150502T212520-0400",
+          "endTime": "20150502T213104-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150502T212520-0400",
+            "endTime": "20150502T213104-0400",
+            "duration": 344.0,
+            "distance": 371.0,
+            "steps": 587
+          }],
+          "lastUpdate": "20150503T025538Z"
+        }, {
+          "type": "place",
+          "startTime": "20150502T213104-0400",
+          "endTime": "20150502T214725-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150502T213529-0400",
+            "endTime": "20150502T213759-0400",
+            "duration": 150.0,
+            "distance": 192.0,
+            "steps": 256
+          }],
+          "lastUpdate": "20150503T025538Z"
+        }, {
+          "type": "move",
+          "startTime": "20150502T214725-0400",
+          "endTime": "20150502T215138-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150502T214725-0400",
+            "endTime": "20150502T215138-0400",
+            "duration": 253.0,
+            "distance": 303.0,
+            "steps": 475
+          }],
+          "lastUpdate": "20150503T025538Z"
+        }],
+        "lastUpdate": "20150503T025538Z"
+      }, {
+        "date": "20150503",
+        "summary": [{
+          "activity": "walking",
+          "group": "walking",
+          "duration": 2369.0,
+          "distance": 2590.0,
+          "steps": 3943
+        }],
+        "segments": [{
+          "type": "place",
+          "startTime": "20150502T215138-0400",
+          "endTime": "20150503T174141-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T173250-0400",
+            "endTime": "20150503T173320-0400",
+            "duration": 30.0,
+            "distance": 26.0,
+            "steps": 51
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "move",
+          "startTime": "20150503T174141-0400",
+          "endTime": "20150503T175659-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T174141-0400",
+            "endTime": "20150503T175659-0400",
+            "duration": 918.0,
+            "distance": 1043.0,
+            "steps": 1535
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "place",
+          "startTime": "20150503T175659-0400",
+          "endTime": "20150503T181412-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T181050-0400",
+            "endTime": "20150503T181120-0400",
+            "duration": 30.0,
+            "distance": 26.0,
+            "steps": 51
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "move",
+          "startTime": "20150503T181412-0400",
+          "endTime": "20150503T182125-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T181412-0400",
+            "endTime": "20150503T182125-0400",
+            "duration": 433.0,
+            "distance": 493.0,
+            "steps": 611
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "place",
+          "startTime": "20150503T182125-0400",
+          "endTime": "20150503T195615-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T193241-0400",
+            "endTime": "20150503T193311-0400",
+            "duration": 30.0,
+            "distance": 15.0,
+            "steps": 30
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "move",
+          "startTime": "20150503T195615-0400",
+          "endTime": "20150503T200419-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T195615-0400",
+            "endTime": "20150503T200419-0400",
+            "duration": 484.0,
+            "distance": 529.0,
+            "steps": 929
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "place",
+          "startTime": "20150503T200419-0400",
+          "endTime": "20150503T205016-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T200617-0400",
+            "endTime": "20150503T200647-0400",
+            "duration": 30.0,
+            "distance": 31.0,
+            "steps": 61
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "move",
+          "startTime": "20150503T205016-0400",
+          "endTime": "20150503T205640-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T205016-0400",
+            "endTime": "20150503T205640-0400",
+            "duration": 384.0,
+            "distance": 396.0,
+            "steps": 614
+          }],
+          "lastUpdate": "20150504T011857Z"
+        }, {
+          "type": "place",
+          "startTime": "20150503T205640-0400",
+          "endTime": "20150505T120145-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150503T210008-0400",
+            "endTime": "20150503T210038-0400",
+            "duration": 30.0,
+            "distance": 31.0,
+            "steps": 61
+          }],
+          "lastUpdate": "20150505T163420Z"
+        }],
+        "lastUpdate": "20150505T163420Z"
+      }, {
+        "date": "20150504",
+        "summary": [{
+          "activity": "walking",
+          "group": "walking",
+          "duration": 243.0,
+          "distance": 187.0,
+          "steps": 290
+        }],
+        "segments": [{
+          "type": "place",
+          "startTime": "20150503T205640-0400",
+          "endTime": "20150505T120145-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150504T175408-0400",
+            "endTime": "20150504T175641-0400",
+            "duration": 153.0,
+            "distance": 125.0,
+            "steps": 167
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150504T185426-0400",
+            "endTime": "20150504T185456-0400",
+            "duration": 30.0,
+            "distance": 26.0,
+            "steps": 51
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150504T192700-0400",
+            "endTime": "20150504T192800-0400",
+            "duration": 60.0,
+            "distance": 36.0,
+            "steps": 72
+          }],
+          "lastUpdate": "20150505T163420Z"
+        }],
+        "lastUpdate": "20150505T163420Z"
+      }, {
+        "date": "20150505",
+        "summary": [{
+          "activity": "walking",
+          "group": "walking",
+          "duration": 3734.0,
+          "distance": 3948.0,
+          "steps": 5297
+        }],
+        "segments": [{
+          "type": "place",
+          "startTime": "20150503T205640-0400",
+          "endTime": "20150505T120145-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T120029-0400",
+            "endTime": "20150505T120059-0400",
+            "duration": 30.0,
+            "distance": 30.0,
+            "steps": 61
+          }],
+          "lastUpdate": "20150505T163420Z"
+        }, {
+          "type": "move",
+          "startTime": "20150505T120145-0400",
+          "endTime": "20150505T121327-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T120145-0400",
+            "endTime": "20150505T121326-0400",
+            "duration": 701.0,
+            "distance": 767.0,
+            "steps": 784
+          }],
+          "lastUpdate": "20150505T163420Z"
+        }, {
+          "type": "move",
+          "startTime": "20150505T121327-0400",
+          "endTime": "20150505T121606-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T121327-0400",
+            "endTime": "20150505T121606-0400",
+            "duration": 159.0,
+            "distance": 119.0,
+            "steps": 239
+          }],
+          "lastUpdate": "20150505T224410Z"
+        }, {
+          "type": "place",
+          "startTime": "20150505T121606-0400",
+          "endTime": "20150505T152927-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T152110-0400",
+            "endTime": "20150505T152210-0400",
+            "duration": 60.0,
+            "distance": 36.0,
+            "steps": 72
+          }],
+          "lastUpdate": "20150505T224410Z"
+        }, {
+          "type": "move",
+          "startTime": "20150505T152927-0400",
+          "endTime": "20150505T153800-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T152927-0400",
+            "endTime": "20150505T153800-0400",
+            "duration": 513.0,
+            "distance": 563.0,
+            "steps": 875
+          }],
+          "lastUpdate": "20150505T224410Z"
+        }, {
+          "type": "place",
+          "startTime": "20150505T153800-0400",
+          "endTime": "20150505T172336-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T153800-0400",
+            "endTime": "20150505T154140-0400",
+            "duration": 220.0,
+            "distance": 300.0,
+            "steps": 400
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T160757-0400",
+            "endTime": "20150505T160827-0400",
+            "duration": 30.0,
+            "distance": 26.0,
+            "steps": 51
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T170453-0400",
+            "endTime": "20150505T170755-0400",
+            "duration": 182.0,
+            "distance": 218.0,
+            "steps": 291
+          }],
+          "lastUpdate": "20150505T224410Z"
+        }, {
+          "type": "place",
+          "startTime": "20150505T172337-0400",
+          "endTime": "20150505T193621-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T174249-0400",
+            "endTime": "20150505T174949-0400",
+            "duration": 420.0,
+            "distance": 492.0,
+            "steps": 655
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T191707-0400",
+            "endTime": "20150505T191740-0400",
+            "duration": 33.0,
+            "distance": 29.0,
+            "steps": 58
+          }],
+          "lastUpdate": "20150506T001833Z"
+        }, {
+          "type": "move",
+          "startTime": "20150505T193621-0400",
+          "endTime": "20150505T194823-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T193621-0400",
+            "endTime": "20150505T194823-0400",
+            "duration": 722.0,
+            "distance": 680.0,
+            "steps": 906
+          }],
+          "lastUpdate": "20150506T001833Z"
+        }, {
+          "type": "place",
+          "startTime": "20150505T194823-0400",
+          "endTime": "20150505T202750-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T202322-0400",
+            "endTime": "20150505T202422-0400",
+            "duration": 60.0,
+            "distance": 46.0,
+            "steps": 92
+          }],
+          "lastUpdate": "20150506T015113Z"
+        }, {
+          "type": "move",
+          "startTime": "20150505T202750-0400",
+          "endTime": "20150505T203754-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150505T202750-0400",
+            "endTime": "20150505T203754-0400",
+            "duration": 604.0,
+            "distance": 642.0,
+            "steps": 813
+          }],
+          "lastUpdate": "20150506T015113Z"
+        }],
+        "lastUpdate": "20150506T015113Z"
+      }, {
+        "date": "20150506",
+        "summary": [{
+          "activity": "walking",
+          "group": "walking",
+          "duration": 1865.0,
+          "distance": 2397.0,
+          "steps": 3188
+        }],
+        "segments": [{
+          "type": "place",
+          "startTime": "20150505T203754-0400",
+          "endTime": "20150506T071710-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T070814-0400",
+            "endTime": "20150506T071114-0400",
+            "duration": 180.0,
+            "distance": 176.0,
+            "steps": 235
+          }],
+          "lastUpdate": "20150506T124934Z"
+        }, {
+          "type": "move",
+          "startTime": "20150506T071710-0400",
+          "endTime": "20150506T072649-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T071710-0400",
+            "endTime": "20150506T072649-0400",
+            "duration": 579.0,
+            "distance": 916.0,
+            "steps": 1175
+          }],
+          "lastUpdate": "20150506T124934Z"
+        }, {
+          "type": "place",
+          "startTime": "20150506T072649-0400",
+          "endTime": "20150506T085933-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T083608-0400",
+            "endTime": "20150506T083738-0400",
+            "duration": 90.0,
+            "distance": 66.0,
+            "steps": 133
+          }],
+          "lastUpdate": "20150506T175317Z"
+        }, {
+          "type": "place",
+          "startTime": "20150506T104925-0400",
+          "endTime": "20150506T105427-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T104925-0400",
+            "endTime": "20150506T105237-0400",
+            "duration": 192.0,
+            "distance": 227.0,
+            "steps": 303
+          }],
+          "lastUpdate": "20150506T175317Z"
+        }, {
+          "type": "move",
+          "startTime": "20150506T105427-0400",
+          "endTime": "20150506T110410-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T105427-0400",
+            "endTime": "20150506T110411-0400",
+            "duration": 584.0,
+            "distance": 828.0,
+            "steps": 973
+          }],
+          "lastUpdate": "20150506T175317Z"
+        }, {
+          "type": "place",
+          "startTime": "20150506T110410-0400",
+          "endTime": "20150507T100102-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T172317-0400",
+            "endTime": "20150506T172517-0400",
+            "duration": 120.0,
+            "distance": 113.0,
+            "steps": 225
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T185835-0400",
+            "endTime": "20150506T185905-0400",
+            "duration": 30.0,
+            "distance": 15.0,
+            "steps": 31
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T194519-0400",
+            "endTime": "20150506T194549-0400",
+            "duration": 30.0,
+            "distance": 15.0,
+            "steps": 31
+          }, {
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150506T231139-0400",
+            "endTime": "20150506T231239-0400",
+            "duration": 60.0,
+            "distance": 41.0,
+            "steps": 82
+          }],
+          "lastUpdate": "20150507T140203Z"
+        }],
+        "lastUpdate": "20150507T140203Z"
+      }, {
+        "date": "20150507",
+        "summary": [{
+          "activity": "walking",
+          "group": "walking",
+          "duration": 60.0,
+          "distance": 46.0,
+          "steps": 92
+        }],
+        "segments": [{
+          "type": "place",
+          "startTime": "20150506T110410-0400",
+          "endTime": "20150507T100102-0400",
+          "activities": [{
+            "activity": "walking",
+            "group": "walking",
+            "manual": false,
+            "startTime": "20150507T013543-0400",
+            "endTime": "20150507T013643-0400",
+            "duration": 60.0,
+            "distance": 46.0,
+            "steps": 92
+          }],
+          "lastUpdate": "20150507T140203Z"
+        }],
+        "lastUpdate": "20150507T140203Z"
+      }, {
+        "date": "20150508",
+        "summary": null,
+        "segments": null
+      }];
+      
+      //create SVG element
+      var svg = d3.select("#chart")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+
+      svg.selectAll("rect")
+        .data(monthdata)
+        .enter()
+        .append("rect")
+        .attr("x", function(d, i) {
+          return i * (w/31);  //Bar width of 20 plus 2 for padding
+        })
+        .attr("y", function(d) {
+          var ret;
+          if (d.summary == null) {
+            return h-0;
+          }
+
+          d.summary.forEach(function(array_element){
+            console.log(array_element.activity);
+            if ((array_element.activity === "walking") || (array_element.activity === "running")) {
+              console.log("y is:");
+              console.log(array_element.steps);
+              ret = (array_element.steps/20);
+            }
+          })
+          return h-ret;
+        })
+        .attr("width", ((w/31) - (barPadding)))
+        .attr("height", function(d){
+          var ret;
+          if (d.summary == null) {
+            return 0;
+          }
+          d.summary.forEach(function(array_element){
+            console.log(array_element.activity);
+            if ((array_element.activity === "walking") || (array_element.activity === "running")) {
+              console.log("height is:");
+              console.log(array_element.steps);
+
+              ret = (array_element.steps)/20;
+
+            }
+          })
+          return ret;
+        })
+        .attr("color", function(d){
+          
+        });
+
+  </script>
   <table style="width:700px">
     <tr>
       <th scope="col">Name</th>
@@ -32,51 +1111,7 @@
     </tr>
   </table>
 
-  <div>
-    <% @parsed_data.each do |data| %>
-      <% segments_array = data["segments"] %>
-        <% if segments_array != nil %>
-          <h5><%= data["date"] %></h5>
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Activity</th>
-                  <th scope="col">Start Time</th>
-                  <th scope="col">End Time</th>
-                  <th scope="col">Duration</th>
-                  <th scope="col">Distance</th>
-                  <th scope="col">Steps</th>
-                  <th colspan="3"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% segments_array.each do |segment| %>
-                  <% segment_activities_array = segment["activities"] %>
-                  <% if segment_activities_array != nil %>
-                    <% segment_activities_array.each do |activity| %>
-                      <% if activity["steps"] != nil &&  activity["duration"] != nil%>
-                        <tr>
-                        <% if activity["steps"]/activity["duration"] > 1.4 %>
-                          <td style="color:red"><%= activity["activity"]%></td>
-                        <% else %>
-                          <td><%= activity["activity"]%></td>
-                        <% end %>
-                          <td><%= activity["startTime"] %></td>
-                          <td><%= activity["endTime"] %></td>
-                          <td><%= activity["duration"].to_s %></td>
-                          <td><%= activity["distance"].to_s %></td>
-                          <td><%= activity["steps"].to_s %></td>
-                        </tr>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
-    <% end %>
-  </div>
-
+  <div style="width:0px; height:0px; color:white; font-size: 0px" id="fitness_data"><%= @body %></div>
   <button class="btn btn-default">
     <%= link_to 'Edit', edit_patient_path(@patient) %>
   </button>
@@ -84,3 +1119,7 @@
     <%= link_to 'Back', patients_path %>
   </button>
 </div>
+  <script>
+    var current_data = ($("#fitness_data").html());
+    //fill_graph(JSON.parse(current_data));
+  </script>

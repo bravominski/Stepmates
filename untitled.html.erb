@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">
+      Stepmates
+    </a>
+  </div>
+  <button class="btn btn-default navbar-btn navbar-right" style="margin-right: 30px">
+    <%= link_to 'Log Out', logout_path %>
+  </button>
+</nav>
+
+<!--Present data for specific patient-->
+<p id="notice"><%= notice %></p>
+
+<div class="container col-md-12"  onload="myFunction()">
+<h1>Patient Data for <%= @patient.name%></h1>
+  <div id="chart">
+  </div>
+  <script>
+  var fill_month_graph = function (current_data) {
+    for (var i = 0; i < current_data.length; i++){
+      d3.select("#chart").append("p").text(current_data[i]["summary"][0]["steps"]);
+    }
+  }
+  </script>
+  <table style="width:700px">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">MRN</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+    </tr>
+    <tr>
+      <th scope="row" class="spec"><%= @patient.name %></th>
+      <td class="col-md-2"><%= @patient.mrn %></td>
+      <td class="col-md-2"><%= @patient.dob %></td>
+      <td class="col-md-3"><%= @patient.email %></td>
+      <td class="col-md-2"><%= link_to 'Email Patient', custom_email_patient_path(@patient) %></td>
+    </tr>
+  </table>
+
+  <div style="width:0px; height:0px; color:black; font-size: 5px" id="fitness_data"><%= @body %></div>
+  <button class="btn btn-default">
+    <%= link_to 'Edit', edit_patient_path(@patient) %>
+  </button>
+  <button class="btn btn-default">
+    <%= link_to 'Back', patients_path %>
+  </button>
+</div>
+  <script>
+    var current_data = ($("#fitness_data").html());
+    fill_graph(JSON.parse(current_data));
+  </script>
+-->

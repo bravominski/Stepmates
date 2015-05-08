@@ -1,5 +1,4 @@
 require 'json'
-require 'gchart'
 
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy, :custom_email, :send_email]
@@ -15,6 +14,13 @@ class PatientsController < ApplicationController
     end
   end
 
+  def data
+    respond_to do |format|
+      format.json {
+        render :json => [1,2,3,4,5]
+      }
+    end
+  end
 
   def show
 
@@ -83,7 +89,6 @@ class PatientsController < ApplicationController
     ###### this is our data that we received ######
     @body = response.body
     @parsed_data = JSON.parse(@body)
-    @line_chart = Gchart.line(:data => [0, 40, 10, 70, 20])
   end
 
 
