@@ -14,10 +14,111 @@ class PatientsController < ApplicationController
     end
   end
 
-  def data
+  def getDayData
+    access_token = params[:access_token]
+
+    uri = URI.parse("https://api.moves-app.com/oauth/v1/tokeninfo?" +
+     "access_token=" + access_token)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+
+    ###### this is our data that we received ######
+    body = response.body
+    validation_response = JSON.parse(body)
+
+
+    if validation_response["error"] != nil
+      ###### make a post request to the moves api endpoint for refresh tokens  ######
+      uri = URI.parse("https://api.moves-app.com")
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new("/oauth/v1/access_token?" + 
+        "grant_type=refresh_token&refresh_token=" + params[:refresh_token] + "&client_id=rk4jNeuJ054WTTlYV9l4QF9dYsGdFwdl" +
+        "&client_secret=gE8sVNO5MQNTX_tKLMoYtfBSu4QVeOco5x9FW_FSq38v0V14K_OKRTo69TSUpvhW")
+
+      @res = http.request(request)
+      @res = @res.body
+
+      ###### renew the access_token and refresh_token in the database ######
+      @patient.access_token = JSON.parse(@res)["access_token"]
+      @patient.refresh_token = JSON.parse(@res)["refresh_token"]
+    end
+
+    ###### get data with access token ######
+    uri = URI.parse("https://api.moves-app.com/api/1.1/user/activities/daily/" +
+      params[:year] + params[:month] + "?" + "access_token=" + access_token)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+
+    ###### this is our data that we received ######
+    @body = response.body
+    @parsed_data = JSON.parse(@body)
+
     respond_to do |format|
       format.json {
-        render :json => [1,2,3,4,5]
+        render :json => @parsed_data
+      }
+    end
+  end
+
+
+  def getMonthData
+    access_token = params[:access_token]
+
+    uri = URI.parse("https://api.moves-app.com/oauth/v1/tokeninfo?" +
+     "access_token=" + access_token)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+
+    ###### this is our data that we received ######
+    body = response.body
+    validation_response = JSON.parse(body)
+
+
+    if validation_response["error"] != nil
+      ###### make a post request to the moves api endpoint for refresh tokens  ######
+      uri = URI.parse("https://api.moves-app.com")
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new("/oauth/v1/access_token?" + 
+        "grant_type=refresh_token&refresh_token=" + params[:refresh_token] + "&client_id=rk4jNeuJ054WTTlYV9l4QF9dYsGdFwdl" +
+        "&client_secret=gE8sVNO5MQNTX_tKLMoYtfBSu4QVeOco5x9FW_FSq38v0V14K_OKRTo69TSUpvhW")
+
+      @res = http.request(request)
+      @res = @res.body
+
+      ###### renew the access_token and refresh_token in the database ######
+      @patient.access_token = JSON.parse(@res)["access_token"]
+      @patient.refresh_token = JSON.parse(@res)["refresh_token"]
+    end
+
+    ###### get data with access token ######
+    uri = URI.parse("https://api.moves-app.com/api/1.1/user/activities/daily/" +
+      params[:year] + params[:month] + "?" + "access_token=" + access_token)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+
+    ###### this is our data that we received ######
+    @body = response.body
+    @parsed_data = JSON.parse(@body)
+
+    respond_to do |format|
+      format.json {
+        render :json => @parsed_data
       }
     end
   end

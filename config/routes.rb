@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get 'addpatient' => 'moves#receiveAuth'
   get 'moves/getdata' => 'moves#getData'
   get 'showall' => 'moves#showall'
+  post 'getMonthData' => 'patients#getMonthData'
+  post 'getDayData' => 'patients#getDayData'
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
