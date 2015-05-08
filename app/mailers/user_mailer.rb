@@ -6,4 +6,8 @@ class UserMailer < ApplicationMailer
 		@url = 'https://arcane-garden-4526.herokuapp.com/login'
 		mail(to: @user.email, subject: "Welcome to our app!")
 	end
+
+	def password_reset(user)
+		@suer = user
+		mail :to => user.email, :subject => "Here is your password!"
 end
