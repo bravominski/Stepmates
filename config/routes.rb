@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'passwrod_resets/new'
+
   resources :patients
   resources :users
+  resources :passwrod_resets
 
   get     'graph_data' => 'patients#data', :defaults => { :format => 'json' }
   get     'login'   => 'sessions#new' # login page
