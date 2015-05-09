@@ -9,6 +9,6 @@ class UserMailer < ApplicationMailer
 
 	def passwrod_reset(user)
 		@user = user
-		mail(from: forgotpassword@stepmates.com to: @user.email, subject: "Here is your password!")
+		mail(to: @user.email, subject: "Here is your password!")
 	end
 end
