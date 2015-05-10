@@ -271,27 +271,56 @@
 
                   svg.append("rect")
                   .attr("x", function() {
-                    return (startTime/2400) * w + 45;
+                    console.log(startTime);
+                    return ((startTime/2400) * w + 45) - ((duration/(3600*24)) * w)/2;
                   })
                   .attr("y", function() {
-                    return h - ((steps/1000) * h);
+                    return h - ((steps/1020) * h);
                   })
                   .attr("width", function() {
-                    console.log(duration);
-
-                    return (duration/36000) * w;
+                    return (duration/(3600*24)) * w;
                   })
                   .attr("height", function() {
-                    return ((steps/1000) * h);
+                    return ((steps/1020) * h);
                   })
                   .attr("fill", function() {
-                    if ((steps/(duration/60)) > 100) {
+                    if ((steps/(duration/60)) > 100 && duration > 600) {
                       return "red";
                     }
                     return "#2ecc71";
-
                   });
 
+                  svg.append("text")
+                  .attr("font-family", "sans-serif")
+                  .attr("font-size", "12px")
+                  .attr("fill", "black")
+                  .attr("text-anchor", "middle")
+                  .text(steps + " steps")
+                  .attr("x", function() {
+                    return ((startTime/2400) * w + 45) - ((duration/(3600*24)) * w)/2;
+                  })
+                  .attr("y", function() {
+                    var retVal = h - ((steps/1020) * h);
+                    console.log(retVal);
+                    if (retVal < 0) return 10;
+                    return h - ((steps/1020) * h);
+                  });
+
+                  svg.append("text")
+                  .attr("font-family", "sans-serif")
+                  .attr("font-size", "12px")
+                  .attr("fill", "black")
+                  .attr("text-anchor", "middle")
+                  .text(Math.round(duration / 60 * 10) / 10 + " min")
+                  .attr("x", function() {
+                    return ((startTime/2400) * w + 45) - ((duration/(3600*24)) * w)/2;
+                  })
+                  .attr("y", function() {
+                    var retVal = h - ((steps/1020) * h);
+                    console.log(retVal);
+                    if (retVal < 0) return 10 + 20;
+                    return h - ((steps/1020) * h) + 10;
+                  });
               }
             }
           }
